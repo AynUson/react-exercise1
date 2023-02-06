@@ -1,41 +1,70 @@
 import { posts as data } from "../data/posts";
+import { generateId } from "../utils";
 
 //private
 let posts = [...data];
 
-function getPosts() {
-  //get all posts
+export function getPosts() {
+  return [...posts];
 }
 
-function getPostsByUser(userId) {
-  //get all posts by userId
+export function getPostsByUser(userId) {
+  return posts.find((user) => user.userId === userId);
 }
 
-function getPostById(id) {
-  //get a single post by id
+export function getPostById(id) {
+  return posts.find((post) => post.id === id);
 }
 
-function addPost(post) {
+export function addPost(post) {
   //add new post to BEGINNING of posts array
   // use generateId function and pass posts array as the argument to generate a unique id.
+  const id = generateId(posts);
+  const pTemp = { id: id, ...post };
+  posts.unshift(pTemp);
 }
 
-function updatePostTitle(id, title) {
+export function updatePostTitle(id, title) {
   //update post title
+  posts = posts.map((post) => {
+    if (post.id === id) {
+      post.title = title;
+      return post;
+    }
+    return post;
+  });
 }
 
-function updatePostBody(id, body) {
+export function updatePostBody(id, body) {
   //update post body
+  posts = posts.map((post) => {
+    if (post.id === id) {
+      post.body = body;
+      return post;
+    }
+    return post;
+  });
 }
 
-function updatePost(id, post) {
+export function updatePost(id, post) {
   //update post title and or body (imagine a form where user is allowed to edit both title and post but may also choose to only edit one of them)
+  posts = posts.map((pTemp) => {
+    if (pTemp.id === id) {
+      return {
+        ...pTemp,
+        ...post,
+      };
+    }
+
+    return pTemp;
+  });
 }
 
-function deletePostBy(id) {
+export function deletePostBy(id) {
+  posts = posts.filter((post) => post.id !== id);
   //delete post by id
 }
 
-function deletePostsByUserId(userId) {
-  //delete all posts of a user by given userId
+export function deletePostsByUserId(userId) {
+  posts = posts.filter((post) => post.userId !== userId);
 }
