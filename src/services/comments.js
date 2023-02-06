@@ -4,9 +4,6 @@ import { generateId } from "../utils";
 //private
 let comments = [...data];
 
-export function getComments() {
-  return [...comments];
-}
 export function getCommentById(id) {
   //get comment by id
   const comment = comments.find((comment) => comment.id === id);
@@ -44,4 +41,8 @@ export function addComment(comment) {
   const cTemp = { id: id, ...comment };
   console.log(cTemp);
   comments.push(cTemp);
+}
+// added this to show added comment
+export function getComments() {
+  return [...comments];
 }
