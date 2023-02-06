@@ -19,8 +19,8 @@ export function updateUser(id, userInfo) {
   users = users.map((user) => {
     if (user.id === id) {
       return {
-        ...user,
-        ...userInfo,
+        ...user, // name age email prop1 prop2 prop3
+        ...userInfo, // email prop1
       };
     }
 
